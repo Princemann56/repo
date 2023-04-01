@@ -1,11 +1,7 @@
 class Solution {
 public:
-    int maxSubarraySumCircular(vector<int>& nums) {
-        int x;
-         if(nums.size()==1)
-         return nums[0];
-        else
-        {
+    int normalsubarray(vector<int>& nums)
+    {
         int res1=nums[0];
         int maxending=nums[0];
         for(int i=1; i<nums.size(); i++)
@@ -14,8 +10,16 @@ public:
             if(maxending>res1)
             res1= maxending;
         }
-        if(res1<0)
         return res1;
+    }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int x;
+         if(nums.size()==1)
+         return nums[0];
+        else
+        {  int maxsubarray=normalsubarray(nums);
+            if(maxsubarray<0)
+            return maxsubarray;
         int sum=0;
         for(int i=0; i<nums.size(); i++)
         {
@@ -25,18 +29,11 @@ public:
          {
              nums[i]=-nums[i];
          }
-        int res2=nums[0];
-        int maxending2=nums[0];
-        for(int i=1; i<nums.size(); i++)
-        {
-            maxending2= max(maxending2+nums[i], nums[i]);
-            if(maxending2>res2)
-            res2= maxending2;
-        }
+        int circular=normalsubarray(nums);
         
-        int res=sum+res2;
+        int res=sum+circular;
 
-        x= max(res1,res);
+        x= max(maxsubarray,res);
         }
         return x;
     }
