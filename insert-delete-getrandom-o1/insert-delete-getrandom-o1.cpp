@@ -1,40 +1,37 @@
 class RandomizedSet {
 public:
-    RandomizedSet() {
-        
-    }
-    map<int,int>mp;
-    vector<int>ans;
-  
-    bool insert(int val) {
-        if(mp.find(val)==mp.end()){
-        ans.push_back(val);
-        mp[val]=ans.size()-1;
-        }
-        else return false;
-        return true;
-    }
-    
-    bool remove(int val) {
-        if(mp.find(val)!=mp.end()){
-            mp[ans.back()]=mp[val];
-         swap(ans.back(),ans[mp[val]]);
-         ans.pop_back();
-        mp.erase(val);
-        }
-        else return false;
-        return true;
-    }
-    
-    int getRandom() {
-        return ans[rand()%mp.size()];
-    }
-};
+   unordered_map<int,int>mp;
+	vector<int>arr;
+	RandomizedSet() {
 
-/**
- * Your RandomizedSet object will be instantiated and called as such:
- * RandomizedSet* obj = new RandomizedSet();
- * bool param_1 = obj->insert(val);
- * bool param_2 = obj->remove(val);
- * int param_3 = obj->getRandom();
- */
+	}
+
+bool insert(int val) {
+ if(mp.count(val))
+ {
+     return false;
+ }
+ arr.push_back(val);
+ mp[val] = arr.size()-1;
+ return true;
+}
+
+bool remove(int val) {
+ if(mp.count(val))
+ {
+ int index = mp[val];
+ int v = arr.back();
+ arr[index] = v;
+ mp[v] = index;
+ arr.pop_back();
+ mp.erase(val);
+return true;
+ }
+return false;
+}
+
+int getRandom() {
+  int index = rand()%arr.size();
+  return arr[index];  
+}
+};
