@@ -1,81 +1,33 @@
 class Solution {
+    vector<vector<int>> DIR{{1,0},{-1,0},{0,1},{0,-1},{1,1},{-1,1},{1,-1},{-1,-1}};
 public:
     void gameOfLife(vector<vector<int>>& board) {
-        int n=board.size();
-int m=board[0].size();
-vector<vector<int>> grid=board;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++)
-            {
-               // int t=board[i][j];
-                int live=0,dead=0;
-               // if(t==1){
-                    if(i-1>=0  && j-1>=0)
-                    {
-                        int t1=board[i-1][j-1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                     if(i-1>=0  )
-                    {
-                        int t1=board[i-1][j];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
+        
+        int m = board.size();
+        int n = board[0].size();
 
-                    if(i-1>=0  && j+1<m)
-                    {
-                        int t1=board[i-1][j+1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                    if(i>=0  && j-1>=0)
-                    {
-                        int t1=board[i][j-1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                    if( j+1<m)
-                    {
-                        int t1=board[i][j+1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                    if(i+1<n  && j-1>=0)
-                    {
-                        int t1=board[i+1][j-1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                     if(i+1<n  )
-                    {
-                        int t1=board[i+1][j];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                     if(i+1<n  && j+1<m)
-                    {
-                        int t1=board[i+1][j+1];
-                        if(t1==0)dead++;
-                        else live++;
-                    }
-                 
-if(board[i][j]==1)
-{
-    if(live<2)grid[i][j]=0;
-    if(live==2 || live==3)grid[i][j]=1;
-    if(live>3)grid[i][j]=0;
-}
-else if(board[i][j]==0)
-{
-    if(live==3)grid[i][j]=1;
-}
-    else
-    grid[i][j]=board[i][j];            
+        vector<vector<int>> ret = board;
+
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                int cnt=0;
+                for(int k=0;k<8;k++)
+                {
+                    int nr = i+DIR[k][0];
+                    int nc = j+DIR[k][1];
+                    if(nr<0 || nc<0 || nr>=m || nc>=n)  continue;
+                    if(board[nr][nc] == 1)  cnt++;
+                }
+
+                if(cnt < 2 || cnt>3) ret[i][j] = 0;
+                else if(cnt == 3)    ret[i][j] = 1; 
             }
         }
-        board=grid;
-        
-        
+
+        // return ret;
+        board = ret;
+
     }
 };
