@@ -9,14 +9,15 @@ public:
         m[0] = 1;
         for (int i = 0; i < n; i++)
         {
-            sum+=nums[i];
+            sum= sum + nums[i];
             int rem = 0;
-            if (sum >= 0)
-            rem = sum % k; 
-            else if (sum < 0)
-                rem = (k + (sum % k)) % k;
+             (sum >= 0) ? rem = sum % k : rem = (k + (sum % k)) % k;
+            // if (sum >= 0)
+            // rem = sum % k; 
+            // else if (sum < 0)
+            //     rem = (k + (sum % k)) % k;
             if (m.find(rem) != m.end())
-                res+= m[rem];
+                res= res +  m[rem];
             m[rem]++;
         }
 
