@@ -8,11 +8,11 @@ public:
         m[0]=1;
         for(int i=0; i<n; i++)
         {
-           sum+=nums[i];
+           sum= sum + nums[i];
            int diff = sum-k;
 
            if(m.find(diff)!= m.end())
-           res+= m[diff];
+           res= res + m[diff];
 
            m[sum]++;
 
