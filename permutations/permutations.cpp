@@ -1,24 +1,28 @@
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int> > permute(vector<int> &num) {
-	    vector<vector<int> > result;
-	    
-	    permuteRecursive(num, 0, result);
-	    return result;
-    }
-    
+    vector<vector<int>> permute(vector<int> &nums)
+    {
+        vector<vector<int>> answer;
 
-	void permuteRecursive(vector<int> &num, int begin, vector<vector<int> > &result)	{
-		if (begin >= num.size()) {
-		   
-		    result.push_back(num);
-		    return;
-		}
-		
-		for (int i = begin; i < num.size(); i++) {
-		    swap(num[begin], num[i]);
-		    permuteRecursive(num, begin + 1, result);
-		    swap(num[begin], num[i]);
-		}
+        permutation(nums, 0, answer);
+        return answer;
+    }
+
+    void permutation(vector<int> &nums, int pos, vector<vector<int>> &answer)
+    {
+        if (pos >= nums.size())
+        {
+
+            answer.push_back(nums);
+            return;
+        }
+
+        for (int i = pos; i < nums.size(); i++)
+        {
+            swap(nums[pos], nums[i]);
+            permutation(nums, pos + 1, answer);
+            swap(nums[pos], nums[i]);
+        }
     }
 };
