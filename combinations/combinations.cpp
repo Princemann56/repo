@@ -5,7 +5,7 @@ public:
         for(int i=0; i<n; i++)
         nums[i]=i+1;
         int p = 1 << n;
-       sort(nums.begin(),nums.end());
+      
         vector<vector<int>> subs(p);
         vector<vector<int>> ans;
         for (int i = 0; i < p; i++) {
