@@ -1,20 +1,25 @@
 class Solution {
 public:
-string addStrings(string num1, string num2) {
-    int i = num1.size() - 1;
-    int j = num2.size() - 1;
-    int carry = 0;
-    string res = "";
-    while(i>=0 || j>=0 || carry){
-        long sum = 0;
-        if(i >= 0){sum += (num1[i] - '0');i--;}
-        if(j >= 0){sum += (num2[j] - '0');j--;}
-        sum += carry; 
-        carry = sum / 10;
-        sum = sum % 10;
-        res =  res + to_string(sum);
+    string addStrings(string num1, string num2) {
+       long long int  n1= num1.size();
+        long long int  n2= num2.size();
+        long long int sum1=0;
+        long long int  sum2=0;
+        for(int i=0; i<n1; i++)
+        {  
+           
+           
+           sum1= sum1 + (num1[i]-48)* pow(10,n1-i-1);
+        }
+        cout<< sum1<<" ";
+        for(int i=0; i<n2; i++)
+        {
+           
+           sum2= sum2 + (num2[i]-48) * pow(10,n2-i-1);
+        }
+        long long int sum = sum1 + sum2;
+        return to_string(sum);
+
+        
     }
-    reverse(res.begin(), res.end());
-    return res;
-}
 };
