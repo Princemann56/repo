@@ -1,11 +1,20 @@
-class Solution {
+class Solution { 
 public:
-   int countDigitOne(int n) {
-    int ones = 0;
-    for (long long m = 1; m <= n; m = m* 10) {
-        int a = n/m, b = n%m;
-        ones = ones + (a + 8) / 10 * m + (a % 10 == 1) * (b + 1);
+    int countDigitOne(int n) {
+    int ret = 0;
+      for(long long int i = 1; i <= n; i*= (long long int)10){
+         int a = n / i;
+         int b = n % i;
+         int x = a % 10;
+         if(x ==1){
+            ret += (a / 10) * i + (b + 1);
+         }
+         else if(x == 0){
+            ret += (a / 10) * i;
+         } else {
+            ret += (a / 10 + 1) *i;
+         }
+      }
+      return ret;
     }
-    return ones;
-}
 };
